@@ -1,0 +1,36 @@
+<div ng-repeat="product in store.products">
+	<h1>
+		{{product.name }} &nbsp&nbsp&nbsp&nbsp&nbsp
+		{{product.price | currency}}
+	</h1>
+	<img ng-src="{{product.img}}"/>
+	<br>
+	<br>
+	<ul class="nav nav-pills">
+		<li ng-class="{active:pane.isSelected(1)}"><a href ng-click="pane.setTab(1)">Description</a></li>
+		<li ng-class="{active:pane.isSelected(2)}"><a href ng-click="pane.setTab(2)">Specification</a></li>
+		<li ng-class="{active:pane.isSelected(3)}"><a href ng-click="pane.setTab(3)">Reviews</a></li>
+	</ul>
+	<br>
+	<button>Add To Cart</button>
+
+	<div class="panel" ng-show="pane.isSelected(1)">
+		<h4>Description</h4>
+		<p>{{product.description}}
+	</div>
+				
+	<div class="panel" ng-show="pane.isSelected(2)">
+		<h4>Specifications</h4>
+		<p>{{product.specs}}
+	</div>
+
+	<div class="panel" ng-show="pane.isSelected(3)">
+		<h3>Reviews</h3>
+		<blockquote style="position:relative;left:25px" ng-repeat="revs in product.reviews">
+			<b>Stars:</b> {{revs.stars}}<br>
+			<b>Body:</b> {{revs.body}}<br>
+			<b>Author:</b> {{revs.author}} on {{revs.createdOn | date}}<br><br>
+		</blockquote>
+		<review-alias></review-alias>			<!--Another controller directive-->
+	</div>
+</div>

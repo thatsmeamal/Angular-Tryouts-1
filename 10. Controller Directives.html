@@ -1,0 +1,49 @@
+<html ng-app="store">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<script type="text/javascript" src="JS/angular.min.js"></script>
+		<script type="text/javascript" src="JS/app6.js"></script>
+	</head>
+	<body>
+		
+		<store-welcome></store-welcome>
+		<div ng-repeat="product in store.products">
+			<product-descs></product-descs>				<!--element directive-->
+		</div>
+		
+	</body>
+</html>
+
+
+<!--//The functioning of controller is defined inside the directive and an alias is given for the controller
+
+Don't know why...but the attribute directive cannot be used for the above functionality
+
+-->
+
+<!--By putting the directive in the loop(ng-repeat), we get different instances of the directive(controller) for each 
+
+iteration.
+
+-->
+
+<!--
+If the code was as below: 
+
+this file:
+	<body>	
+		<store-welcome></store-welcome>
+		<product-descs></product-descs>
+	</body>
+
+product-descs.html:
+	<div ng-repeat="product in store.products">
+		...
+		...
+	</div>
+
+Now, the loop will be inside the product-descs.html as shown above. In this case, only once was the directive initialised(when the product-descs directive was called from this html page). After that, the same initiation is used for each iteration. Hence, we will not be able to differentiate the different products.
+
+To see the error code, refer to files: Controller Directives-wrong.html & product-descs-wrong.html 
+
+-->

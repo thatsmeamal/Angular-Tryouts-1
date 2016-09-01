@@ -1,0 +1,29 @@
+<html ng-app="store">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<script type="text/javascript" src="JS/angular.min.js"></script>
+		<script type="text/javascript" src="JS/app7.js"></script>
+		<script type="text/javascript" src="JS/product-details.js"></script>
+		<script type="text/javascript" src="JS/review-details.js"></script>
+	</head>
+	<body>
+		
+		<store-welcome></store-welcome>
+		<div ng-repeat="product in store.products">
+			<product-descs></product-descs>				<!--element directive-->
+		</div>
+		
+	</body>
+</html>
+
+
+<!--
+In this example, diffferent sections of the code are written in different modules, saved in different .js file.
+
+AL those .js files are to be included in the script tag.
+
+Here, the three modules present are:
+	store
+	product-details
+	review-details
+-->

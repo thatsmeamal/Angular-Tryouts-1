@@ -1,0 +1,82 @@
+<html ng-app="store">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<script type="text/javascript" src="JS/angular.min.js"></script>
+		<script type="text/javascript" src="JS/app5.js"></script>
+	</head>
+	<body ng-controller="StoreController as store">
+		<h1>{{"Hello, Angular!"}}</h1>
+		
+		<div ng-repeat="product in store.products" ng-controller="PanelController as pane">
+			<h1>
+				{{product.name }} &nbsp&nbsp&nbsp&nbsp&nbsp
+				{{product.price | currency}}
+			</h1>
+			<img ng-src="{{product.img}}"/>
+			<br>
+			<br>
+			<ul class="nav nav-pills">
+				<li ng-class="{active:pane.isSelected(1)}"><a href ng-click="pane.setTab(1)">Description</a></li>
+				<li ng-class="{active:pane.isSelected(2)}"><a href ng-click="pane.setTab(2)">Specification</a></li>
+				<li ng-class="{active:pane.isSelected(3)}"><a href ng-click="pane.setTab(3)">Reviews</a></li>
+			</ul>
+			<br>
+			<button>Add To Cart</button>
+
+			<div class="panel" ng-show="pane.isSelected(1)">
+				<h4>Description</h4>
+				<p>{{product.description}}
+			</div>
+			
+			<div class="panel" ng-show="pane.isSelected(2)">
+				<h4>Specifications</h4>
+				<p>{{product.specs}}
+			</div>
+
+			<div class="panel" ng-show="pane.isSelected(3)">
+				<h3>Reviews</h3>
+				<blockquote style="position:relative;left:25px" ng-repeat="revs in product.reviews">
+						<b>Stars:</b> {{revs.stars}}<br>
+						<b>Body:</b> {{revs.body}}<br>
+						<b>Author:</b> {{revs.author}} on {{revs.createdOn | date}}<br><br>
+				</blockquote>
+				<form name="reviewForm" ng-submit="reviewForm.$valid && reviewCtrl.submitReview(product)" ng-controller="ReviewController as reviewCtrl" novalidate>
+
+					<!--Above in the 'submitReview' function, we cannot use any name for the argument. 
+						Since the details of the product is to be passed, the argument name should be same
+						as the one we used for iterating the different products. Here, the variable 
+						'product' was used for this purpose(see the 1st div tag in <body>).
+						That was why, the argument passed is 'product'.
+					-->
+
+					<blockquote>
+						<b>Stars:</b>{{reviewCtrl.revs.stars}}<br>
+						<b>Body:</b>{{reviewCtrl.revs.body}}<br>
+						<b>Author:</b>{{reviewCtrl.revs.author}}<br><br>	
+					</blockquote>
+
+					<h4>Enter your Review</h4>
+					<div style="position:relative;left:25px;">
+						<b>Rating:</b><br>
+						<select ng-model="reviewCtrl.revs.stars" style="margin-bottom:20px;size=30%;" required>
+							<option value="1" selected>1 star</option>
+							<option value="2">2 star</option>
+							<option value="3">3 star</option>
+							<option value="4">4 star</option>
+							<option value="5">5 star</option>
+						</select>
+						<br><br>
+						<b>Comments:</b><br>
+						<textarea ng-model="reviewCtrl.revs.body" style="margin-bottom:20px;" placeholder="Enter your comments" required></textarea>
+						<br>
+						<b>Email-id:</b><br>
+						<input ng-model="reviewCtrl.revs.author" type="email" style="margin-bottom:20px;" placeholder="Enter your e-mail" required/>
+						<br>
+						<input type="submit" value="Submit"/>
+						The form is {{reviewForm.$valid}}
+					</div>	
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

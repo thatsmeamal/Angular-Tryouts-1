@@ -1,0 +1,36 @@
+<form name="reviewForm" ng-submit="reviewForm.$valid && reviewCtrl.submitReview(product)" novalidate>
+
+					<!--Above in the 'submitReview' function, we cannot use any name for the argument. 
+						Since the details of the product is to be passed, the argument name should be same
+						as the one we used for iterating the different products. Here, the variable 
+						'product' was used for this purpose(see the 1st div tag in <body>).
+						That was why, the argument passed is 'product'.
+					-->
+
+					<blockquote>
+						<b>Stars:</b>{{reviewCtrl.revs.stars}}<br>
+						<b>Body:</b>{{reviewCtrl.revs.body}}<br>
+						<b>Author:</b>{{reviewCtrl.revs.author}}<br><br>	
+					</blockquote>
+
+					<h4>Enter your Review</h4>
+					<div style="position:relative;left:25px;">
+						<b>Rating:</b><br>
+						<select ng-model="reviewCtrl.revs.stars" style="margin-bottom:20px;size=30%;" required>
+							<option value="1" selected>1 star</option>
+							<option value="2">2 star</option>
+							<option value="3">3 star</option>
+							<option value="4">4 star</option>
+							<option value="5">5 star</option>
+						</select>
+						<br><br>
+						<b>Comments:</b><br>
+						<textarea ng-model="reviewCtrl.revs.body" style="margin-bottom:20px;" placeholder="Enter your comments" required></textarea>
+						<br>
+						<b>Email-id:</b><br>
+						<input ng-model="reviewCtrl.revs.author" type="email" style="margin-bottom:20px;" placeholder="Enter your e-mail" required/>
+						<br>
+						<input type="submit" value="Submit"/>
+						The form is {{reviewForm.$valid}}
+					</div>	
+				</form>
